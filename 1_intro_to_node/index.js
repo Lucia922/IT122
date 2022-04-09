@@ -6,13 +6,13 @@ http.createServer(function(req,res){
   switch(path) {
     case '/': 
       res.writeHead(200, {'Content-Type': 'text/plain'});
-      res.write('hello');
+      res.write('Hello! This is a single-page-application project for IT122 Javascript2 in SCC 2022 Spring quarter.');
       res.end();
-
       break;
     case '/about':
       res.writeHead(200, {'Content-Type': 'text/plain'});
-      res.end('About');
+      res.write('My name is Jinhee. My favorites are coffee & tea, hiking in the Cascades, paddle boarding, organizing, and sushi.');
+      res.end();
       break;
     default:
       res.writeHead(404, {'Content-Type': 'text/plain'});
