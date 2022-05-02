@@ -1,15 +1,25 @@
 import http from 'http';
+import { parse } from "querystring"; 
 import {getItem, getAll} from './data.js';
-
+//import cinematheque from './data.js';
+//import querystring from 'querystring';
+//import * as data from './data.js';
+ 
 http.createServer(function(req,res){
   console.log('createServer got request')
-  const path = req.url.toLowerCase();
-  switch(path) {
+  const path = req.url.toLowerCase(); 
+  console.log(path)
+  let url_parts = req.url.split("?"); //seperate route from query string
+  console.log(url_parts)
+  let query = parse(url_parts[1]); //convert query string to a JS object
+  console.log(query)
+  //console.log(data.getItem("playtime"));
+  switch(url_parts[0]) {
     case '/': 
       res.writeHead(200, {'Content-Type': 'text/plain'});
       res.write('Hello! This is a single-page-application project for IT122 Javascript2 in SCC 2022 Spring quarter.');
       res.write(getAll())
-      res.end();
+      res.end(); 
       break;
     case '/about':
       res.writeHead(200, {'Content-Type': 'text/plain'});
@@ -18,7 +28,7 @@ http.createServer(function(req,res){
       break;
     case '/detail': 
       res.writeHead(200, {'Content-Type': 'text/plain'});
-      res.write(getItem('Playtime'));
+      res.write("Details for " + getItem(query["movie"]));
       res.end();
       break;
     default:

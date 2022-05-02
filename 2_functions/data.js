@@ -9,15 +9,37 @@ let cinematheque = [
 
 
 export const getItem = (value) => {
-    return JSON.stringify(cinematheque.filter((item) => {
-        return item['name'] == value;
-    }),null,5) 
+    return JSON.stringify(cinematheque.find((movie) => {
+        return movie["name"] == value;
+    }),null,5)
 }
 
 export const getAll = () => {
-    let string = JSON.stringify(cinematheque,null,5);
-    return string;
-}
+    let movies = JSON.stringify(cinematheque,null,5);
+    return movies;
+}   
 
 
 
+//exports.getAll = () => {      
+//    return cinematheque;      
+//}
+
+//exports.getItem = name => {       
+//   const item = cinematheque.find(cinematheque => cinematheque.name === name);       
+//   return item;         
+//}
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
