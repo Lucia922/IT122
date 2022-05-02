@@ -28,7 +28,7 @@ http.createServer(function(req,res){
       break;
     case '/detail': 
       res.writeHead(200, {'Content-Type': 'text/plain'});
-      res.write("Details for " + getItem(query["movie"]));
+      res.write("Details for " + query["name"]);
       res.end();
       break;
     default:
