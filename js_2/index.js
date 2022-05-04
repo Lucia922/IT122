@@ -1,4 +1,5 @@
 import http from 'http';
+import path from 'path';
 import { parse } from "querystring"; 
 import {getItem, getAll} from './data.js';
 import express from 'express';
@@ -9,8 +10,48 @@ const app = express();
 app.set('port', process.env.PORT || 3000);
 app.use(express.static('./public')); // set location for static files
 app.use(express.urlencoded()); //Parse URL-encoded bodies
+app.use(express.json()); //Used to parse JSON bodies
+app.set('view engine', 'ejs'); // set the view engine to ejs
 
+// send static file as response
+app.get('/', (req,res) => {
+  res.type('text/html');
+  res.render("home", {cinematheque: [ { name: "La Notte", genre:"Drama"}]});
+  //res.sendFile('./public/home.html');
+ });
+
+app.get('/detail', (req,res) => {
+  res.type('text/html');
+  console.log(req.query);
+  res.end("Detail for " + req.query["name"])
+  //res.sendFile('./public/home.html');
+ });
+
+app.post('/detail', (req,res) => {
+  res.type('text/html');
+  console.log(req.body);
+  res.end("Detail for " + req.body["name"])
+  //res.sendFile('./public/home.html');
+ });
+
+// send plain text response
+app.get('/about', (req,res) => {
+  res.type('text/plain');
+  res.send('About page'); 
+ });
  
+// define 404 handler
+app.use((req,res) => {
+  res.type('text/plain');
+  res.status(404);
+  res.send('404 - Not found');
+ });
+
+ app.listen(app.get('port'), () => {
+  console.log('Express started');
+ });
+
+/*
 http.createServer(function(req,res){
   console.log('createServer got request')
   const path = req.url.toLowerCase(); 
@@ -44,3 +85,4 @@ http.createServer(function(req,res){
   
 }).listen(process.env.PORT || 3000);
 console.log('after createServer')
+*/

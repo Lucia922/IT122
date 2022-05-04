@@ -1,0 +1,9 @@
+<link rel="stylesheet" href="/css/main.css">
+
+<h2>Home</h2>
+<hr>
+<h3>Cinematheque</h3>
+
+<% cinematheque.forEach(function(movie) { %>
+    <li><a href="/detail?name=<%= movie.name %>"> <%= movie.name %></li>
+<% }); %>
