@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="=UTF-8">
+        <title>Cinematheque Home page</title>
+        <link rel="stylesheet" href="/css/main.css">
+    </head>
+    <body>
+       <h2> <a href="/">CINEMATHEQUE</a></h2>
+       <hr>
+        <% if (result) { %>
+            <h3><%= name %> details </h3>
+            <li>Name: <%= result.name %>
+            <li>Genre: <%= result.genre %>
+            <li>Year: <%= result.year %>
+            <li>Director: <%= result.director %>
+            <li>Cast: <%= result.cast %>
+        <% } else { %>
+            not found
+        <% } %>   
+    </body>
+    
+</html>
