@@ -1,9 +1,22 @@
-<link rel="stylesheet" href="/css/main.css">
-
-<h2>Home</h2>
-<hr>
-<h3>Cinematheque</h3>
-
-<% cinematheque.forEach(function(movie) { %>
-    <li><a href="/detail?name=<%= movie.name %>"> <%= movie.name %></li>
-<% }); %>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="=UTF-8">
+        <title>Cinematheque Home page</title>
+        <link rel="stylesheet" href="/css/main.css">
+    </head>
+    <body>
+        <h2>CINEMATHEQUE</h2>
+        <hr>
+        <h3>What is Cinematheque?</h3>
+        <p> A small film library <br> 
+            dedicated to avant-garde or classic cinema.<br> 
+            Most of Cinematheque films are <br>
+            innovative, eccentric, unique and <br> 
+            sometimes frightening.</p>
+        <h3>Movies</h3>
+        <% cinematheque.forEach(function(movie) { %>
+            <li><a href="/detail?name=<%= movie.name %>"> <%= movie.name %></li>
+        <% }); %>
+    </body>
+</html>
