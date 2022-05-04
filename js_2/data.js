@@ -1,9 +1,10 @@
 let cinematheque = [
     { name : "Band of Outsiders", genre : "Crime/Drama", year : 1964, director : "Jean-Luc Godard",  cast : ["Jean-Luc Godard", "Anna Karina", "Sami Frey"] },
-    { name : "L'Avventura", genre : "Drama/Ronamce",  year : 1960, director : "Giovanni Fusco",  cast : ["Monica Vitti", "Lea Massari", "Gabriele Fezetti"] },
+    { name : "L'Avventura", genre : "Drama/Ronamce",  year : 1960, director : "Michelangelo Antonioni",  cast : ["Monica Vitti", "Lea Massari", "Gabriele Fezetti"] },
     { name : "In the Mood For Love", genre : "Romance/Drama",  year : 2000, director : "Wong Kar-wai", cast : ["Tony Leung", "Maggie Cheung", "Ping Lam Siu"] },
     { name : "Playtime", genre : "Comedy", year : 1967, director : "Jacques", cast : ["Jacques Tati", "Barbara Dennek", "Jacqueline Lecomte"] },
-    { name : "High Noon", genre : "Western/Drama", year : 1952, director : "Fred Zinnemann", cast : ["Gary Cooper", "Grace Kelly", "Fred Zinnemann"]}
+    { name : "High Noon", genre : "Western/Drama", year : 1952, director : "Fred Zinnemann", cast : ["Gary Cooper", "Grace Kelly", "Fred Zinnemann"]},
+    { name : "La Notte", genre : "Drama", year : 1961, director : "Michelangelo Antonioni", cast : ["Monica Vitti", "Lea Massari", "Gabriele Ferzetti"]}
 ];
 
 
