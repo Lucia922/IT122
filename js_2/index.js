@@ -3,6 +3,7 @@ import path from 'path';
 import { parse } from "querystring"; 
 import {getItem, getAll} from './data.js';
 import express from 'express';
+import { name } from 'ejs';
 //import cinematheque from './data.js';
 //import querystring from 'querystring';
 //import * as data from './data.js';
@@ -16,16 +17,18 @@ app.set('view engine', 'ejs'); // set the view engine to ejs
 // send static file as response
 app.get('/', (req,res) => {
   res.type('text/html');
-  res.render("home", {cinematheque: [ { name: "La Notte", genre:"Drama"}]});
+  res.render("home", {cinematheque: getAll()});
   //res.sendFile('./public/home.html');
  });
 
 app.get('/detail', (req,res) => {
   res.type('text/html');
   console.log(req.query);
-  res.end("Detail for " + req.query["name"])
+  let result = getItem(req.query.name);
+  res.render("details", {name: req.query.name, result: result});
+  });
   //res.sendFile('./public/home.html');
- });
+ 
 
 app.post('/detail', (req,res) => {
   res.type('text/html');
