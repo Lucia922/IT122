@@ -48,12 +48,13 @@ let students = [
     { name : "sue", age : 28, classes : ["web150", "web120"] }
 ];
 
-//console.log(students[1])
-//console.log(students[1]["name"])
+// console.log(students[0])
+// console.log(students[0]["name"])
 
-//let student = students.pop()
-//console.log(student["name"])
+// let student = students.pop()
+// console.log(student["name"])
 //console.log(students.length)
+// console.log(students);
 
 //let found = students.find((student) => {
 //   return student.name === 'mary';
@@ -85,9 +86,12 @@ let students = [
 //console.log(olderStudents);
 
 //.sort()
-const byAgeAsc = (student1, student2) => {
-    // sorts students by aage in ascending order
-    return student1.age - student2.age;
-}
 
-console.log(students.sort(byAgeAsc));
+
+// const byAgeAsc = (student1, student2) => {
+//     // sorts students by aage in ascending order
+//     return student1.age - student2.age;
+// }
+
+// console.log(students.sort(byAgeAsc));
+
