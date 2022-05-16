@@ -4,9 +4,12 @@ import { parse } from "querystring";
 import {getItem, getAll} from './data.js';
 import express from 'express';
 import { name } from 'ejs';
+import { Cinematheque } from "./Cinematheque.js";
+
 //import cinematheque from './data.js';
 //import querystring from 'querystring';
 //import * as data from './data.js';
+
 const app = express();
 app.set('port', process.env.PORT || 3000);
 app.use(express.static('./public')); // set location for static files
@@ -15,19 +18,37 @@ app.use(express.json()); //Used to parse JSON bodies
 app.set('view engine', 'ejs'); // set the view engine to ejs
 
 // send static file as response
-app.get('/', (req,res) => {
-  res.type('text/html');
-  res.render("home", {cinematheque: getAll()});
-  //res.sendFile('./public/home.html');
- });
+app.get('/', (req, res) => {
+  Cinematheque.find({}).lean()
+    .then((cinematheque) => {
+      // respond to browser only after db query completes
+      res.render('home', { cinematheque });
+    })
+    .catch(err => next(err))
+});
 
-app.get('/detail', (req,res) => {
-  res.type('text/html');
-  console.log(req.query);
-  let result = getItem(req.query.name);
-  res.render("details", {name: req.query.name, result: result});
-  });
-  //res.sendFile('./public/home.html');
+// app.get('/', (req,res) => {
+//   res.type('text/html');
+//   res.render("home", {cinematheque: getAll()});
+//   //res.sendFile('./public/home.html');
+//  });
+
+app.get('/detail', (req,res,next) => {
+  // db query can use request parameters
+  Cinematheque.findOne({ name:req.query.name }).lean()
+      .then((movie) => {
+          res.render('details', {result: movie, name:req.query.name } );
+      })
+      .catch(err => next(err));
+});
+
+// app.get('/detail', (req,res) => {
+//   res.type('text/html');
+//   console.log(req.query);
+//   let result = getItem(req.query.name);
+//   res.render("details", {name: req.query.name, result: result});
+//   });
+//   //res.sendFile('./public/home.html');
  
 
 app.post('/detail', (req,res) => {
@@ -50,7 +71,7 @@ app.use((req,res) => {
   res.send('404 - Not found');
  });
 
- app.listen(app.get('port'), () => {
+app.listen(app.get('port'), () => {
   console.log('Express started');
  });
 
