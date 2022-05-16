@@ -18,6 +18,7 @@ app.use(express.json()); //Used to parse JSON bodies
 app.set('view engine', 'ejs'); // set the view engine to ejs
 
 // send static file as response
+// cinematheque server's 'home' Route to use MongoDb database
 app.get('/', (req, res) => {
   Cinematheque.find({}).lean()
     .then((cinematheque) => {
@@ -33,6 +34,7 @@ app.get('/', (req, res) => {
 //   //res.sendFile('./public/home.html');
 //  });
 
+// cinematheque server's 'detail' Route to use MongoDb database
 app.get('/detail', (req,res,next) => {
   // db query can use request parameters
   Cinematheque.findOne({ name:req.query.name }).lean()
