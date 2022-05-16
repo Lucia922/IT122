@@ -1,2 +1,4 @@
 #ignore files installed by npm
 node_modules
+#ignore credential files
+credential.js
