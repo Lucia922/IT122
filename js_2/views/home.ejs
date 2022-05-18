@@ -8,12 +8,8 @@
     <body>
         <h2>CINEMATHEQUE</h2>
         <hr>
-        <h3>What is Cinematheque?</h3>
-        <p> A small film library <br> 
-            dedicated to avant-garde or classic cinema.<br> 
-            Most of Cinematheque films are <br>
-            innovative, eccentric, unique and <br> 
-            sometimes frightening.</p>
+        <h3><a href="/about">What is Cinematheque?</a></h3>
+        
         <h3>Movies</h3>
         <% cinematheque.forEach(function(movie) { %>
             <li><a href="/detail?name=<%= movie.name %>"> <%= movie.name %></li>

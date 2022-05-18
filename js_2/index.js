@@ -5,6 +5,8 @@ import {getItem, getAll} from './data.js';
 import express from 'express';
 import { name } from 'ejs';
 import { Cinematheque } from "./Cinematheque.js";
+// import req from 'express/lib/request';
+// import res from 'express/lib/response';
 
 //import cinematheque from './data.js';
 //import querystring from 'querystring';
@@ -17,7 +19,7 @@ app.use(express.urlencoded()); //Parse URL-encoded bodies
 app.use(express.json()); //Used to parse JSON bodies
 app.set('view engine', 'ejs'); // set the view engine to ejs
 
-// send static file as response
+
 // cinematheque server's 'home' Route to use MongoDb database
 app.get('/', (req, res) => {
   Cinematheque.find({}).lean()
@@ -28,6 +30,7 @@ app.get('/', (req, res) => {
     .catch(err => next(err))
 });
 
+// send static file as response
 // app.get('/', (req,res) => {
 //   res.type('text/html');
 //   res.render("home", {cinematheque: getAll()});
@@ -45,26 +48,59 @@ app.get('/detail', (req,res,next) => {
 });
 
 // app.get('/detail', (req,res) => {
-//   res.type('text/html');
+//   res.type('text/html'); 
 //   console.log(req.query);
 //   let result = getItem(req.query.name);
 //   res.render("details", {name: req.query.name, result: result});
 //   });
 //   //res.sendFile('./public/home.html');
- 
 
-app.post('/detail', (req,res) => {
-  res.type('text/html');
-  console.log(req.body);
-  res.end("Detail for " + req.body["name"])
-  //res.sendFile('./public/home.html');
- });
+// add movie object into mogodb using postman 1
+// app.post('/add', (req,res,next) => {
+//   // find & update existing movie, or add new
+//   console.log(req.body)
+//   if (!req.body.name) {
+//     // insert new document
+//     let movie = newMovie ({name:req.body.name, genre:req.body.genre, year:req.body.year, director:req.body.director, cast:req.body.cast});
+//     if (err) return next(err);
+//     console.log(newMovie)
+//     res.json({updated: 0, name: newMovie.name});
+//   }
+// });
+
+// add movie object into mogodb using postman 2
+app.post('/add', (req,res,next) => {
+  const newMovie = {'name':req.body.name, 'genre':req.body.genre, 'year':req.body.year, 'director':req.body.director, 'cast':req.body.cast}
+
+  Cinematheque.updateOne ({'name':req.body.name}, newMovie, {upsert:true}, (err, result) => {
+    if (err) return next(err);
+    console.log(result);
+    res.send( req.body.name + " movie added");
+  });
+
+});
+
+// app.post('/detail', (req,res) => {
+//   res.type('text/html');
+//   console.log(req.body);
+//   res.end("Detail for " + req.body["name"])
+//   //res.sendFile('./public/home.html');
+//  });
 
 // send plain text response
-app.get('/about', (req,res) => {
-  res.type('text/plain');
-  res.send('About page'); 
- });
+// app.get('/about', (req,res) => {
+//   res.type('text/plain');
+//   res.send('About page'); 
+//  });
+
+app.get('/about', (req, res) => {
+  Cinematheque.find({}).lean()
+    .then((cinematheque) => {
+      // respond to browser only after db query completes
+      res.render('about');
+    })
+    .catch(err => next(err))
+});
  
 // define 404 handler
 app.use((req,res) => {
