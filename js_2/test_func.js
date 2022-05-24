@@ -51,10 +51,10 @@ let students = [
 // console.log(students[0])
 // console.log(students[0]["name"])
 
-// let student = students.pop()
-// console.log(student["name"])
-//console.log(students.length)
-// console.log(students);
+let student = students.pop()
+console.log(student["name"])
+console.log(students.length)
+console.log(students);
 
 //let found = students.find((student) => {
 //   return student.name === 'mary';
