@@ -1,3 +1,5 @@
+import { name } from "ejs";
+
 let cinematheque = [
     { name : "Band of Outsiders", genre : "Crime/Drama", year : "1964", director : "Jean-Luc Godard",  cast : ["Jean-Luc Godard", "Anna Karina", "Sami Frey"] },
     { name : "L'Avventura", genre : "Drama/Ronamce",  year : "1960", director : "Michelangelo Antonioni",  cast : ["Monica Vitti", "Lea Massari", "Gabriele Fezetti"] },
@@ -7,10 +9,15 @@ let cinematheque = [
     { name : "La Notte", genre : "Drama", year : "1961", director : "Michelangelo Antonioni", cast : ["Monica Vitti", "Lea Massari", "Gabriele Ferzetti"]}
 ];
 
+// let film = cinematheque .pop()
+// console.log(film["name"])
+// console.log(cinematheque.length)
+// console.log(film);
 
-export const getItem = (value) => {
+
+export const getItem = (name) => {
     return cinematheque.find((movie) => {
-        return movie["name"].toLowerCase() == value.toLowerCase();
+        return movie["name"].toLowerCase() == name.toLowerCase();
     });
 };
 
@@ -19,22 +26,78 @@ export const getAll = () => {
     return movies;
 };  
 
-export const addItem = (newItem) => {
-    //add addItem
-    if (typeof newItem != 'object') {
-        console.log('new item must be an object')
-        return 
+export const addMovie = (name, genre, year, director, cast) => {
+    if (name == undefined || genre == undefined || year == undefined || director == undefined || cast == undefined) {
+        return false;
+
+        cinematheque.push ({ name: name, genre: genre, year: year, director: director, cast: cast});
     }
+};
 
-    //we know newItem is an object now
-    console.log(`add - ${newItem.name}`);
-    return true
-}
+// export const removeMovie = (name) => {
+//     let index = cinematheque.findIndex(item => item.name === name); // finds the index value using the name parameter
 
-export let result;
-// result = addItem('Harry porter');
-result = addItem({'name': 'High Heels'});
-console.log(`added? ${result}`)
+//     if (index > -1) {
+//         cinematheque.splice(index, 1);
+//     }
+//     else {
+//         return false;
+//     }
+// };
+
+export const removeMovie = (name) => {
+    cinematheque.remove ((movie) => {
+        return cinematheque.name !== name
+
+    });   
+};
+
+
+
+// export const addMovie = (newMovie) => {
+//     const oldLength = cinematheque.length;
+//     // use existing get() method to check if movie already in out list
+//     let found = getItem(newMovie.name);
+//     if (!found) {
+//         cinematheque.push(newMovie);
+//     }
+//     // if old & new array lengths differ, item was added
+//     return {added: oldLength !==cinematheque.length, total:cinematheque.length};
+// };
+
+
+// export const deleteMovie = (name) => {
+//     // retain array length for later comparison after array modification
+//     const oldLength = cinematheque.length;
+//     cinematheque = cinematheque.filter((movie) => {
+//         return movie.name !==name;
+//     });
+//     // if old & new array lengths differ, item was deleted
+//     return {deleted: oldLength !==cinematheque.length, total: cinematheque.length};
+// };
+
+
+
+
+
+
+// // First try addItem //
+// export const addItem = (newMovie) => {
+//     //add addItem
+//     if (typeof newMovie != 'object') {
+//         console.log('new item must be an object')
+//         return 
+//     }
+
+//     //we know newItem is an object now
+//     console.log(`add - ${newMovie.name}`);
+//     return true
+// }
+
+// export let result;
+// // result = addItem('Harry porter');
+// result = addItem({'name': 'High Heels'});
+// console.log(`added? ${result}`)
 
 
 

@@ -10,7 +10,7 @@ import { Cinematheque } from "./Cinematheque.js";
 
 //import cinematheque from './data.js';
 //import querystring from 'querystring';
-//import * as data from './data.js';
+import * as data from './data.js';
 
 const app = express();
 app.set('port', process.env.PORT || 3000);
@@ -21,7 +21,7 @@ app.set('view engine', 'ejs'); // set the view engine to ejs
 
 
 // cinematheque server's 'home' Route to use MongoDb database
-app.get('/', (req, res) => {
+app.get('/', (req, res, next) => {
   Cinematheque.find({}).lean()
     .then((cinematheque) => {
       // respond to browser only after db query completes
@@ -55,7 +55,32 @@ app.get('/detail', (req,res,next) => {
 //   });
 //   //res.sendFile('./public/home.html');
 
-// add movie object into mogodb using postman 1
+// // delete movie object 
+// app.get('/delete/:name', (req,res) => {
+//   Cinematheque.deleteOne ({name: req.params.name}, () => {
+//     res.send(req.params.name + " successfully deleted!");
+//   }); 
+// });
+
+app.get('/delete/:name', (req,res) => {
+  cinematheque.remove ({name: req.query.name}, (err, result) => {
+     if (err) { return next (err)}
+     removeMovie ( req.query.name )
+     res.render ('delete', {name: req.query.name} )
+
+   });
+});
+
+// app.get('/delete/:name', (req, res, next) => {
+//   Cinematheque.deleteOne ({'name': req.params.id}, (err, result) => {
+//     if (err) return next(err);
+//     // return # of items deleted
+//     console.log(result)
+//     res.json({"deleted": result});
+//   });
+// });
+
+// add movie object into mogodb using postman 1 - not work
 // app.post('/add', (req,res,next) => {
 //   // find & update existing movie, or add new
 //   console.log(req.body)
@@ -93,7 +118,7 @@ app.post('/add', (req,res,next) => {
 //   res.send('About page'); 
 //  });
 
-app.get('/about', (req, res) => {
+app.get('/about', (req, res, next) => {
   Cinematheque.find({}).lean()
     .then((cinematheque) => {
       // respond to browser only after db query completes
