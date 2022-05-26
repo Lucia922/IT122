@@ -23,7 +23,7 @@ export const getItem = (name) => {
 
 export const getAll = () => {
     let movies = cinematheque;
-    return movies;
+    return movies;     
 };  
 
 export const addMovie = (name, genre, year, director, cast) => {
