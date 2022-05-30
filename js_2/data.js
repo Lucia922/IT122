@@ -1,4 +1,5 @@
 import { name } from "ejs";
+import { Cinematheque } from "./Cinematheque.js";
 
 let cinematheque = [
     { name : "Band of Outsiders", genre : "Crime/Drama", year : "1964", director : "Jean-Luc Godard",  cast : ["Jean-Luc Godard", "Anna Karina", "Sami Frey"] },
@@ -17,7 +18,7 @@ let cinematheque = [
 
 export const getItem = (name) => {
     return cinematheque.find((movie) => {
-        return movie["name"].toLowerCase() == name.toLowerCase();
+        return movie.name.toLowerCase() == name.toLowerCase();
     });
 };
 
@@ -51,6 +52,8 @@ export const removeMovie = (name) => {
 
     });   
 };
+
+
 
 
 
