@@ -17,16 +17,6 @@ const getItem = (movie) => {
     return {name : "Band of Outsiders", genre : "Crime/Drama", year : "1964", director : "Jean-Luc Godard",  cast : ["Jean-Luc Godard", "Anna Karina", "Sami Frey"]}
 };
 
-// const addMovie = (newMovie) => {
-//     const oldLength = cinematheque.length;
-//     // use existing get() method to check if book already in our list
-//     let found = this.get(newMovie.name);
-//     if (!found) {
-//         cinematheque.push(newMovie);
-//     }
-//     // if old & new array lengths differ, item was added
-//     return {added: oldLength !== cinematheque.length, total: cinematheque.length };
-// };
 
 const addMovie = (name, genre, year, director, cast) => {
     if (name == undefined || genre == undefined || year == undefined || director == undefined || cast == undefined) {
@@ -43,10 +33,21 @@ const removeMovie = (name) => {
     });   
 };
 
+// const addMovie = (newMovie) => {
+//     const oldLength = cinematheque.length;
+//     // use existing get() method to check if book already in our list
+//     let found = this.get(newMovie.name);
+//     if (!found) {
+//         cinematheque.push(newMovie);
+//     }
+//     // if old & new array lengths differ, item was added
+//     return {added: oldLength !== cinematheque.length, total: cinematheque.length };
+// };
+
 
 describe("test deep equality", () => {
   
-//....//get movie
+//get movie
  it("getItem returns correct movie", () => {
      let result = getItem("Band of outsiders");
      expect(result).to.deep.equal(
@@ -59,7 +60,7 @@ describe("test deep equality", () => {
  });
 
 
-//....//add movie
+//add movie
 it("adds a new movie", () => {
     let result = addMovie({name : "Harry Porter", genre : "Crime/Drama", year : "1964", director : "Jean-Luc Godard",  cast : ["Jean-Luc Godard", "Anna Karina", "Sami Frey"]});
     expect(result.added).to.be.true;
@@ -78,7 +79,7 @@ it("adds a new movie", () => {
  });
 
 
-//....//delete movie
+//delete movie
  it("removeMovie removed from the cinematheque", () => {
      let result = removeMovie("High Heels");
      expect(result).to.deep.equal(
