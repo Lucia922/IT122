@@ -1,0 +1,58 @@
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>React App Demo</title>
+    <link rel="stylesheet" href="/css/react.css">
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+
+    <!-- Don't use this in production: -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+
+<style>
+  .title { color: red; }
+
+  .li {
+    list-style: none; 
+}
+
+</style>
+
+<body>
+
+<div id="root"></div>
+<script type="text/babel">
+    
+    // const divStyle = {
+    //         color: 'blue'
+    //     };
+
+    const cinematheque = <%- cinematheque %>;
+    console.log(cinematheque)
+    const MovieList = (props) => {
+      console.log(props)
+      return props.cinematheque.map((movie) => <li className="li" key={movie._id}><a href ="/detail?name=${movie.name}">{movie.name}</a></li>);
+    }
+
+    // define other components
+
+    const Cinematheque = () => {
+      return <div>
+        <h1 className="title">CINEMATHEQUE</h1>
+
+        <h3><a href="/about"> What is Cinematheque?</a></h3>
+        
+        <h3>Movies</h3> 
+        
+        <MovieList cinematheque={cinematheque}/>
+        
+        </div>;
+    }
+
+    
+    ReactDOM.render(<Cinematheque />, document.getElementById('root'));
+    // ReactDOM.render(< App/ user = "Cinematheque"/>), document.getElementById('root');
+</script>
+</body>
+</html>

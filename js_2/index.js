@@ -27,7 +27,7 @@ app.get('/', (req, res, next) => {
   Cinematheque.find({}).lean()
     .then((cinematheque) => {
       // respond to browser only after db query completes
-      res.render('home', { cinematheque });
+      res.render('home_react', { cinematheque: JSON.stringify(cinematheque) });
     })
     .catch(err => next(err))
 });
@@ -55,17 +55,17 @@ app.get('/detail', (req,res,next) => {
   // db query can use request parameters
   Cinematheque.findOne({ name:req.query.name }).lean()
       .then((movie) => {
-          res.render('details', {result: movie, name:req.query.name } );
+          res.render('details_react',  {result: movie, name:req.query.name });
       })
       .catch(err => next(err));
 });
-
+// {result: movie, name:req.query.name }
 //send static file as response
 app.get('/detail', (req,res) => {
   res.type('text/html'); 
   console.log(req.query);
   let result = getItem(req.query.name);
-  res.render("details", {name: req.query.name, result: result});
+  res.render("details_react", {name: req.query.name, result: result});
   });
   //res.sendFile('./public/home.html');
 
@@ -75,7 +75,7 @@ app.get('/api/detail/:name', (req, res) => {
     console.log(name);
     Cinematheque.findOne({ name: name}, (err, result) => {
       if (name) {
-        res.json(result);
+      res.json(result);
       } else {
         return res.status(500).send('Database Error occurred');
       }
@@ -163,7 +163,7 @@ app.get('/about', (req, res, next) => {
   Cinematheque.find({}).lean()
     .then((cinematheque) => {
       // respond to browser only after db query completes
-      res.render('about');
+      res.render('about_react', { cinematheque: JSON.stringify(cinematheque) });
     })
     .catch(err => next(err))
 });

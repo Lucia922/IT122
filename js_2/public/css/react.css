@@ -1,0 +1,18 @@
+body {
+    background-color: #f8f8f7;
+    text-align: center; 
+}
+
+.title  {
+    color: red;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+h3{
+    margin-top:5%;
+}
+
+li {
+    list-style: none; 
+}
