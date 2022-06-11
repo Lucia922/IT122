@@ -28,7 +28,7 @@ describe("test deep equality", () => {
 
 it("adds a new movie", () => {
     let result = addMovie({name : "Insiders", genre : "Crime/Drama", year : "1964", director : "Jean-Luc Godard",  cast : ["Jean-Luc Godard", "Anna Karina", "Sami Frey"]});
-    expect(result).to.be.false;
+    expect(result).to.be.true;
 });
 
  
@@ -42,7 +42,7 @@ it("fails to add an existing movie", () => {
 
 it("deletes an existing movie", () => {
     let result = removeMovie("High Heels");
-    expect(result).to.be.undefined;
+    expect(result).to.be.true;
        
 });
 
