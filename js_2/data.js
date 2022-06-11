@@ -47,7 +47,7 @@ export const addMovie = (name, genre, year, director, cast) => {
 // };
 
 export const removeMovie = (name) => {
-    cinematheque.remove ((movie) => {
+    Cinematheque.deleteOne ((movie) => {
         return cinematheque.name !== name
 
     });   
