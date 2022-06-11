@@ -32,7 +32,7 @@
     console.log(cinematheque)
     const MovieList = (props) => {
       console.log(props)
-      return props.cinematheque.map((movie) => <li className="li" key={movie._id}><a href ="/detail?name=${movie.name}">{movie.name}</a></li>);
+      return props.cinematheque.map((movie) => <li className="li" key={movie._id}><a href={"/detail?name="+movie.name}>{movie.name}</a></li>);
     }
 
     // define other components
